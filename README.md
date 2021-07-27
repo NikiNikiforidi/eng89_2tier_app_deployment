@@ -41,4 +41,117 @@
 - -------------------------------------
 ### SSH into existing machine
 - Find the instance, select it and press `connect`
-- Copy and past the
+- Copy and past the command in `ssh` directory
+<br> </br>
+- --------------------------
+### Start/Atop instance
+- Select an instance and select `instance state` and either select `Start instance` OR `Stop instance`
+
+- ------------------------------------
+<br> </br>
+**SSH 	TIMEOUT ERROR FIX**
+- Most likely when you restart your instace aws allocates new IP.
+-To reset IP: select instance -> Actions -> Instance Settings ->
+<br> </br>
+- -------------------------
+### Copy files from host to instance
+- Copy app folder from: `/c/Users/Niki/eng89_virtualisation/Vagrant` to Instace
+<br> </br>
+- In `/vagrant` directory, run:  
+` scp -i ~/.ssh/eng89_devops.pem -r app/ubuntu@54.73.28.131:~/app/`
+<br> </br>
+- Where:
+- - `scp` securly copies files 
+- - `~/.ssh...` is path to where to fetch the file
+- - `-r` copy all items
+- - `app` from this current location
+- - `ubuntu...` copy to specific instance
+- - `:~/app/` where you want to copy it
+- Once copy complete, youshould have app folder in the instance
+<br> </br>
+- -------------------------------------
+### 2 tier architecture Sparta Global app setup
+- Set up 2 instances,named app and db and follow steps from repo: eng89_virtualisation
+<br> </br>
+**In app instance**
+- Update and upgrade 
+- `sudo apt-get update -y`
+- `sudo apt-get upgrade -y`
+<br> </br>
+- Install git
+- `sudo apt-get install git -y`
+<br> </br>
+- Install nodejs
+- `sudo apt-get install 
+python-software-properties -y`
+- `curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -`
+- `sudo apt-get install nodejs -y`
+<br> </br>
+- Install pm2
+- `sudo npm install pm2 -g`
+<br> </br>
+
+- ------------------------------------
+
+- **To allow public access to port 3000**
+- select `eng89_niki_app` instance in aws and click `security` -> `Security groups` -> `Edit inbound rules` -> `add rule` 
+- Change `port range` = 3000, `source` = Anywhere IPv4
+- save rule and refresh page
+- ----------------------------------
+**Run app**
+<br></br>
+- Open directoy `app` and run `npm start`
+- -----------------------------------
+### Reverse Proxy
+- In `eng89_niki_app` instance, go to `cd /etc/nginx/sites-available`
+- Change default file to:
+```
+server {
+    listen 80;
+
+    server_name _;
+    location / {
+        proxy_pass http://54.73.28.131:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+
+
+``` 
+- Check nginx config `sudo nginx -t`
+- Restart nginx `sudo systemctl restart nginx`
+- Go to app directory and run `npm start`
+<br> </br>
+- -------------------------------------
+### Install mongodb on eng89_niki_db instance
+
+```
+# mongodb keys
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927 
+echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+# Install mongod and multiple packages
+sudo apt-get install -y --allow-downgrades mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+
+
+```
+<br> </br>
+- Go to `cd /etc` and change bindIp to 0.0.0.0 in mongod.conf
+- `sudo nano mongod.conf
+`
+- Go back to home directory and run 
+```
+# To restart and enable changes
+sudo systemctl restart mongod
+sudo systemctl enable mongod
+
+```
+- Good practice to check if mongod is running with: `systemctl status mongod
+`
