@@ -8,7 +8,6 @@
 
 - ---------------------------------------
 ### Setting up a new EC2 instance on AWS
-<br> </br>
 
 
 - 1) Navigate to ec2 dashboard and create new instance
@@ -27,9 +26,6 @@
 <br> </br>
 - ------------------------------------------------
 
-<br> </br>
-
-
 
 ### SSH into new instance
 - (make sure you have the eng89_devops key)
@@ -43,8 +39,6 @@
 - (Adds key permanently into your hosts file in your machine)
 <br> </br>
 - -------------------------------------
-<br> </br>
 ### SSH into existing machine
-<br> </br>
 - Find the instance, select it and press `connect`
 - Copy and past the
