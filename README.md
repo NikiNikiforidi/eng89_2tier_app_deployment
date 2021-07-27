@@ -155,3 +155,21 @@ sudo systemctl enable mongod
 ```
 - Good practice to check if mongod is running with: `systemctl status mongod
 `
+<br> </br>
+- ---------------------------------
+### Create persistant variable in eng89_niki_app instance
+
+- Make sure to use db public ip:34.243.86.240 (in this case) to connect db and app
+- To create a persistance variable, run: `sudo echo export DB_HOST="mongodb://34.243.86.240:27017/posts" >> ~/.bashrc
+`
+- Need to run the source file to reload the information `source ~/.bashrc`
+- To check if varaible exists, run `env` or `printenv DB_HOST` 
+<br> </br>
+- **Make sure to give app access to db by adding new security group rule**
+- Open `Security groups` for eng89_niki_db instance and `edit unbound rules`
+- Create new rule and change `port range`=27017 and `source`=54.73.28.131/32, where the ip is the app ip
+- save new rules
+- -------------------------------------
+### Run app/posts
+- In `app` directory open `seeds` and run `node seed.js`
+- Go back to `app` directory, run `npm start` and all should work
