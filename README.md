@@ -3,6 +3,9 @@
 
 - Make sure to be logged in and have location set to ireland
 
+![Capture3](https://user-images.githubusercontent.com/86292184/127200568-a6006f11-5ad3-42be-ad1a-e24a72e97f06.PNG)
+
+
 <br> </br>
 - ------------------------------------
 <br> </br>
@@ -26,10 +29,10 @@
 - 3) Choose an instance type, we chose Family:t2, Type:t2micro etc
 - 4) Install instance details, change `subnet` to DevOpsStudent default 1a and `auto-assign public ip` to enable
 - 5) Add storage default settings sufice
-- 6) Add Tags, `key` = Name and `Value` = eng89_YourName_ExtraInfo (In my case `eng89_niki_db`)
-- 7) Config Security Group (set up to allow specific access), Create new one with naming convention eng89_name_SG_ExtraInfo (In my case eng89_niki_SG_mongodb). `type`=ssh,  `port range` = 22, `source` = MyIP (if you leave 
-- To have group access add another rule (inbound rules means you're allowing access to ppl coming in) and set: `type` = HTTP, `port` = 80, `source`= Anywhere
-- Because we have enabled public ip that means we need the http for anyone to access
+- 6) Add Tags, `key` = Name and `Value` = eng89_YourName_ExtraInfo
+- 7) Config Security Group (set up to allow specific access), Create new one with naming convention eng89_name_SG_ExtraInfo . `type`=ssh,  `port range` = 22, `source` = MyIP (if you leave 
+	- To have group access add another rule (inbound rules means you're allowing access to ppl coming in) and set: `type` = HTTP, `port` = 80, `source`= Anywhere
+	- Because we have enabled public ip that means we need the http for anyone to access
 - 8) Review instance launch. Just check everything is set up correctly 
 - 9) LAUNCH 
 - 10) `Choose an existing key pair`, `Select a key pair` = eng89_devops (This key-file has been sent to us by our supervisor)
@@ -67,13 +70,13 @@
 ` scp -i ~/.ssh/eng89_devops.pem -r app/ubuntu@54.73.28.131:~/app/`
 <br> </br>
 - Where:
-- - `scp` securly copies files 
-- - `~/.ssh...` is path to where to fetch the file
-- - `-r` copy all items
-- - `app` from this current location
-- - `ubuntu...` copy to specific instance
-- - `:~/app/` where you want to copy it
-- Once copy complete, youshould have app folder in the instance
+	- `scp` securly copies files 
+	- `~/.ssh...` is path to where to fetch the file
+	- `-r` copy all items
+	- `app` from this current location
+	- `ubuntu...` copy to specific instance
+	- `:~/app/` where you want to copy it
+- Once copy complete, you should have app folder in the instance
 <br> </br>
 - -------------------------------------
 ### 2 tier architecture Sparta Global app setup
@@ -98,11 +101,14 @@ python-software-properties -y`
 <br> </br>
 
 - ------------------------------------
-
 - **To allow public access to port 3000**
 - select `eng89_niki_app` instance in aws and click `security` -> `Security groups` -> `Edit inbound rules` -> `add rule` 
 - Change `port range` = 3000, `source` = Anywhere IPv4
 - save rule and refresh page
+
+- ![Capture](https://user-images.githubusercontent.com/86292184/127200660-7fad4463-72d4-4b07-aee3-41a5599f1b08.PNG)
+
+
 - ----------------------------------
 **Run app**
 <br></br>
@@ -171,10 +177,14 @@ sudo systemctl enable mongod
 - Need to run the source file to reload the information `source ~/.bashrc`
 - To check if varaible exists, run `env` or `printenv DB_HOST` 
 <br> </br>
-- **Make sure to give app access to db by adding new security group rule**
+- ------------------------------------------------------------------------
+- **To give app access to db port 27017**
 - Open `Security groups` for eng89_niki_db instance and `edit unbound rules`
 - Create new rule and change `port range`=27017 and `source`=54.73.28.131/32, where the ip is the app ip
 - save new rules
+
+![Capture2](https://user-images.githubusercontent.com/86292184/127200708-6a4a8b62-776e-46e8-8a57-760a42ab6392.PNG)
+
 - -------------------------------------
 ### Run app/posts
 - In `app` directory open `seeds` and run `node seed.js`
