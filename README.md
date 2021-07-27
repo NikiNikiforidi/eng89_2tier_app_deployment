@@ -4,7 +4,18 @@
 - Make sure to be logged in and have location set to ireland
 
 <br> </br>
-
+- ------------------------------------
+<br> </br>
+**SSH 	TIMEOUT ERROR FIX**
+- Likely when you restart your instace, aws allocates new IP.
+-To reset IP: 
+	- Open EC2 dashboard
+	- Under Recouses select security groups
+	- Find your instance and open
+	- Open and edit inbound rules
+	- On SSH log change `custom` to `MyIP`
+	- Save rules 
+<br> </br>
 
 - ---------------------------------------
 ### Setting up a new EC2 instance on AWS
@@ -47,11 +58,6 @@
 ### Start/Atop instance
 - Select an instance and select `instance state` and either select `Start instance` OR `Stop instance`
 
-- ------------------------------------
-<br> </br>
-**SSH 	TIMEOUT ERROR FIX**
-- Most likely when you restart your instace aws allocates new IP.
--To reset IP: select instance -> Actions -> Instance Settings ->
 <br> </br>
 - -------------------------
 ### Copy files from host to instance
