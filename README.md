@@ -48,7 +48,7 @@
 - Go to `ssh client`
 - Copy `chmod...` command to ensure your key is not publicaly viewable 
 - Open Gitbash terminal and open directory where eng89_devops.pem key is, in my case it is in my ssh folder.
-- Past `chmoc...` command in ssh directory
+- Past `chmoc...` command in ssh directory. **Only required to do once for new instance**
 - Now we need to connect to the machine using the key. Copy `example` line (`ssh -i etc.`) and paste in terminal. Allow continue connecting 
 - (Adds key permanently into your hosts file in your machine)
 <br> </br>
@@ -58,7 +58,7 @@
 - Copy and past the command in `ssh` directory
 <br> </br>
 - --------------------------
-### Start/Atop instance
+### Start/Stop instance
 - Select an instance and select `instance state` and either select `Start instance` OR `Stop instance`
 
 <br> </br>
@@ -106,7 +106,9 @@ python-software-properties -y`
 - Change `port range` = 3000, `source` = Anywhere IPv4
 - save rule and refresh page
 
-- ![Capture](https://user-images.githubusercontent.com/86292184/127200660-7fad4463-72d4-4b07-aee3-41a5599f1b08.PNG)
+
+![app](https://user-images.githubusercontent.com/86292184/127358241-7ce6a9c3-d2a3-4b26-858e-08aa7a3b906b.PNG)
+
 
 
 - ----------------------------------
@@ -183,7 +185,7 @@ sudo systemctl enable mongod
 - Create new rule and change `port range`=27017 and `source`=54.73.28.131/32, where the ip is the app ip
 - save new rules
 
-![Capture2](https://user-images.githubusercontent.com/86292184/127200708-6a4a8b62-776e-46e8-8a57-760a42ab6392.PNG)
+![db](https://user-images.githubusercontent.com/86292184/127358305-d324c88f-27d4-4abd-bf13-b865b25f17be.PNG)
 
 - -------------------------------------
 ### Run app/posts
