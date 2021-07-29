@@ -130,7 +130,7 @@ server {
 
     server_name _;
     location / {
-        proxy_pass http://54.73.28.131:3000;
+        proxy_pass http://54.73.28.131:3000; # app public ip
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -144,6 +144,8 @@ server {
 - Check nginx config `sudo nginx -t`
 - Restart nginx `sudo systemctl restart nginx`
 - Go to app directory and run `npm start`
+<br> </br>
+-If you load the app public ip without the post, you should get the app home page
 <br> </br>
 - -------------------------------------
 ### Install mongodb on eng89_niki_db instance
@@ -178,7 +180,7 @@ sudo systemctl enable mongod
 - ---------------------------------
 ### Create persistant variable in eng89_niki_app instance
 
-- Make sure to use db public ip:34.243.86.240 (in this case) to connect db and app
+- Make sure to use db public ip (in this case) to connect db and app
 - To create a persistance variable, run: `sudo echo export DB_HOST="mongodb://34.243.86.240:27017/posts" >> ~/.bashrc
 `
 - Need to run the source file to reload the information `source ~/.bashrc`
@@ -196,3 +198,4 @@ sudo systemctl enable mongod
 ### Run app/posts
 - In `app` directory open `seeds` and run `node seed.js`
 - Go back to `app` directory, run `npm start` and all should work
+- To check it's working: app_public_ip/posts in browser
