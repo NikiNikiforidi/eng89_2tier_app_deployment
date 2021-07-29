@@ -116,6 +116,7 @@ python-software-properties -y`
 **Run app**
 <br></br>
 - Open directoy `app` and run `npm start`
+- To check if app is working, use your app public IP with the port
 - -----------------------------------
 ### Reverse Proxy
 - In `eng89_niki_app` instance, go to `cd /etc/nginx/sites-available`
