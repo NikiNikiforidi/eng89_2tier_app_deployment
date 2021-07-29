@@ -68,7 +68,7 @@
 <br> </br>
 - In `/vagrant` directory, run:  
 ` scp -i ~/.ssh/eng89_devops.pem -r app/ubuntu@54.73.28.131:~/app/`
--(The IP above is the public IP for that instance)
+- (The IP above is the public IP for that instance)
 <br> </br>
 - Where:
 	- `scp` securly copies files 
