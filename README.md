@@ -75,7 +75,7 @@
 	- `~/.ssh...` is path to where to fetch the file
 	- `-r` copy all items
 	- `app` from this current location
-	- `ubuntu...` copy to specific instance
+	- `ubuntu...` copy to specific instance with public ip
 	- `:~/app/` where you want to copy it
 - Once copy complete, you should have app folder in the instance
 <br> </br>
