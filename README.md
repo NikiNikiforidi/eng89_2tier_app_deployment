@@ -100,6 +100,9 @@ python-software-properties -y`
 - Install pm2
 - `sudo npm install pm2 -g`
 <br> </br>
+- Install nginx
+`sudo apt-get install nginx`
+<br> </br>
 
 - ------------------------------------
 - **To allow public access to port 3000**
