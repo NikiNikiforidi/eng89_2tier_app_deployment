@@ -189,7 +189,7 @@ sudo systemctl enable mongod
 - ------------------------------------------------------------------------
 - **To give app access to db port 27017**
 - Open `Security groups` for eng89_niki_db instance and `edit unbound rules`
-- Create new rule and change `port range`=27017 and `source`=54.73.28.131/32, where the ip is the app ip
+- Create new rule and change `port range`=27017 and `source`=54.73.28.131/32, where the ip is the public app ip
 - save new rules
 
 ![db](https://user-images.githubusercontent.com/86292184/127358305-d324c88f-27d4-4abd-bf13-b865b25f17be.PNG)
